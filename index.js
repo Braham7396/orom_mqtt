@@ -1,6 +1,7 @@
 const mqtt = require("mqtt");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const http = require("http");
 const Cycle = require("./models/cycleModel");
 
 dotenv.config({ path: "./config.env" });
@@ -54,3 +55,14 @@ mongoose
     console.log("DB connection successful!");
   })
   .then(mqttConnectWithCycleDB());
+
+const app = http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("Hello from MQTT <-> MongoDB Service\n");
+});
+
+app.listen(process.env.PORT, () => {
+  console.log(
+    `MQTT <-> MongoDB Service is running on port ${process.env.PORT}`
+  );
+});
