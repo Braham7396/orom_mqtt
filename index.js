@@ -52,5 +52,5 @@ mongoose
   })
   .then(() => {
     console.log("DB connection successful!");
-    mqttConnectWithCycleDB();
-  });
+  })
+  .then(mqttConnectWithCycleDB());
